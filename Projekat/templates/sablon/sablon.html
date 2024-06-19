@@ -1,0 +1,121 @@
+<!-- Stevan Adžić 2019/0477 - Django -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {#  Ucitavanje statickih podataka za Bootstrap  #}
+    {# Dodati i u svaku izvedenu stranicu #}
+    {% load static %}
+
+    {% block head %}
+        <!-- Ovde ukljuciti stilove za odgovarajucu izvedenu stranicu -->
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <div class="row zaokrugli" id="header">
+        <div class="col-12 col-sm-12 col-lg-10">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a href="{% url 'index' %}" class="navbar-brand">
+                    <img src="{% static 'osmeh/slike/Untitled.jpg' %}" alt="Logo" width="150px">
+                </a>
+
+                <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="{% url 'uslugeIcene' %}" class="nav-link">Usluge i cene</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'pregledOrdinacija' %}" class="nav-link">Ordinacije</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'pregledSvihDok' %}" class="nav-link">Doktori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'termin' %}" class="nav-link">Zakazivanje termina</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'kontakt' %}" class="nav-link">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+
+        <div class="col-12 col-sm-12 col-lg-2 align-self-center text-center">
+
+            <button type="button" class="dropdown-toggle btn" data-bs-toggle="dropdown" style="vertical-align: middle;">
+                {% if user.is_authenticated %}
+                    {{ user.first_name }} {{ user.last_name }}
+                {% else %}
+                    Gost
+                {% endif %}
+            </button>
+
+            {% if user.is_authenticated %}
+                <ul class="dropdown-menu">
+
+                    {% if user.is_superuser %}
+                        <li><a href="{% url 'pregledKorisnika' %}" class="dropdown-item"> Pregled korisnika</a></li>
+                        <li><a href="{% url 'izmenaAdmin' %}" class="dropdown-item"> Izmena naloga</a></li>
+                    {% elif user.pacijent %}
+                        <li><a href="{% url 'profilKorisnika' %}" class="dropdown-item"> Moj nalog</a></li>
+                        <li><a href="{% url 'pacijentiRezervacije' %}" class="dropdown-item"> Moje rezervacije</a></li>
+                        <li><a href="{% url 'istorijaPacijent' %}" class="dropdown-item"> Moja istorija</a></li>
+                        <li><a href="{% url 'izmena' %}" class="dropdown-item"> Izmena naloga</a></li>
+                    {% elif user.stomatolog %}
+                        <li><a href="{% url 'profilKorisnika' %}" class="dropdown-item"> Moj nalog</a></li>
+                        <li><a href="{% url 'doctorsTerms' %}" class="dropdown-item"> Aktivni termini</a></li>
+                        <li><a href="{% url 'doctorHistory' %}" class="dropdown-item"> Istorija pregleda</a></li>
+                        <li><a href="{% url 'izmena' %}" class="dropdown-item"> Izmena naloga</a></li>
+                    {% endif %}
+
+                    <li><a href="{% url 'logout' %}" class="dropdown-item"> Odjava</a></li>
+                </ul>
+            {% else %}
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'login' %}" class="dropdown-item">Prijava</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="row zaokrugli" id="main_body" style="background-color: white;">
+
+        <!-- Dohvatanje putanje trenutne izvedene stranice i postavljanje klase izabran u odgovarajuci
+        link u navigracionom baru -->
+        <script>
+            var trenutna_stranica = "{{ request.path }}";
+            var navigacija = document.querySelectorAll('.navbar-nav .nav-item');
+            navigacija.forEach(function (element) {
+                var link = element.querySelector('a');
+                if (link.getAttribute('href') === trenutna_stranica) {
+                    element.classList.add('izabran');
+                }
+            });
+        </script>
+        {% block base %}
+        {% endblock %}
+
+    </div>
+    <div class="row zaokrugli" id="footer" style="background-color: white;">
+        <div class="col-sm-12 text-center">
+            <p>Autori: Mihailo Pantović, Mihailo Pavlović, Stevan Adžić, Dimitrije Glišić</p>
+        </div>
+    </div>
+</div>
+</body>
+{% block skriptaAjax %}
+{% endblock %}
+</html>

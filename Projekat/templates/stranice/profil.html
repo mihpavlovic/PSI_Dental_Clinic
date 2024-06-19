@@ -1,0 +1,54 @@
+<!--Dimitrije Glišić 2020/0630-->
+<!--Mihailo Pantovic 2020/0120 Django-->
+{% extends 'sablon/sablon.html' %}
+{% load static %}
+{% block head %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="{% static 'osmeh/profile.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'osmeh/profil.css' %}" rel="stylesheet" type="text/css">
+    <title>Osmeh++</title>
+{% endblock %}
+
+{% block base %}
+    <div class="row doktorPregled">
+        <div class="col1 col-sm-4">
+            {% if user.pfp %}
+                <img class="img-fluid rounded mt-2" src="{{ user.pfp.url }}" alt="photo" height="300px"
+                     width="300px">
+            {% else %}
+                <img class="img-fluid rounded mt-2" src="{% static 'osmeh/slike/profil.jpg' %}" alt="Photo123"
+                     height="300px"
+                     width="300px">
+            {% endif %}
+            {#            <a href="{% url 'deaktivacijaNalogaPacijentDoktor' %}" id="btn1">#}
+            {#                <button type="button" class="btn text-center">Deaktivacija profila</button>#}
+            {#            </a>#}
+
+        </div>
+        <div class="col2 col-sm-8 paragraf">
+            <p style="font-size: medium;">Ime: {{ user.first_name }}</p>
+            <hr>
+            <p style="font-size: medium;">Prezime: {{ user.last_name }}</p>
+            <hr>
+            <p style="font-size: medium;">Email adresa: {{ user.email }}</p>
+            <hr>
+            <p style="font-size: medium;">Pol: {{ user.pol }}</p>
+            <hr>
+            {% if user.pacijent %}
+
+                <p style="font-size: medium;">JMBG: {{ user.jmbg }}</p>
+
+            {% elif user.stomatolog %}
+
+                <p style="font-size: medium;">Biografija: {{ user.stomatolog.biografija }}</p>
+
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+

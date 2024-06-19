@@ -1,0 +1,137 @@
+body {
+    /*background-image: url(pozadina1.jpg);*/
+    background-color: #dcdcdc/*#e04763#96d900*/;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.proba{
+    display:flex;
+    align-items:center; /* vertically aligned! */
+    justify-content: center;
+}
+
+.nav-item>a{
+    border-bottom: 2px solid white;
+    color: white
+    
+}
+
+.nav-item:hover{
+    
+   
+    border-bottom: 2px solid gray;
+    
+    
+}
+#header{
+    font-size: 22px;
+    margin-bottom: 10px;
+    background-color: white;
+    
+
+}
+
+.navbar-brand{
+    margin-right: 10px;
+    /*padding-left: 30px;*/
+}
+
+/*==========================================================*/
+
+#main_body{
+    margin-bottom: 10px;
+}
+
+
+#tekst_logovanje{
+    font-size: 70px;
+}
+
+.paragraf{
+    font-size: 25px
+}
+.sitniji_paragraf{
+    font-size: 17px
+}
+#slikaZubar>img{
+    width: 40%;
+    outline: 5px double black;
+    outline-offset: 5px;
+}
+
+#prijavaDugme{
+    justify-content: center;
+}
+.btn{
+    
+    color: white;
+    background-color: #96d900/*#e04763*/;
+    border-radius: 5px;
+
+}
+
+.izabran{
+    font-weight: bold;
+    border-bottom: 2px solid gray;
+
+}
+
+.zaokrugli{
+    border-radius: 2px;
+}
+
+
+/*===============================================================*/
+/*===================activeTerms.html/activeTermsDoctor============================*/
+#main_body>#col2{
+    outline: 5px double black;
+    outline-offset: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#main_body>#col2>.prikaz{
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.datPretraga{
+    margin-left: auto;
+}
+
+.btn{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+#btn1{
+    margin-right: 20px;
+    margin-left: 50px;
+}
+
+#btn3{
+    margin-right: 20px;
+    margin-left: 50px;
+}
+
+
+.termin{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    outline: 5px double black;
+    outline-offset: 5px;
+    padding-left: 20px;
+}
+/*===============================================================*/

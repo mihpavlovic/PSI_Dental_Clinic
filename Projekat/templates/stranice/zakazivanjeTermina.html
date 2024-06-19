@@ -1,0 +1,172 @@
+<!--Dimitrije Glišić 2020/0630-->
+{% extends "sablon/sablon.html" %}
+
+{% load static %}
+
+{% block head %}
+    {#  Ucitavanje jQuerry-a  #}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="{% static 'osmeh/styleLogin.css' %}" rel="stylesheet" type="text/css">
+    <title>Osmeh++</title>
+{% endblock %}
+
+{% block base %}
+    <div id="mainDiv" class="col-sm-4 text-center mx-auto">
+        <h2 id="naslovReg">Zakazivanje termina</h2>
+        {% if messages %}
+            {% for msg in messages %}
+                <p style="color: red">{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+        <form id="zakazivanjeForma" method="post" action="{% url 'terminZakazivanje' %}">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="lokacija">Lokacija:</label>
+                <select name="lokacija" class="form-control" id="lokacija">
+                    <option value="" disabled selected hidden>Izaberite lokaciju...</option>
+                    {% for lokacija in lokacije %}
+                        <option value="{{ lokacija.idordinacija }}">{{ lokacija.adresa }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="btn btn-primary" id="zaposleni">Prikazi dostupne doktore</button>
+
+
+            <div class="form-group">
+                <label for="doktor">Doktor:</label>
+                <select name="doktor" class="form-control" id="doktor" disabled>
+                    <option value="" disabled selected hidden>Izaberite doktora...</option>
+
+                    {% for doktor in doktori %}
+                        <option value="{{ doktor.id }}">{{ doktor.first_name }} {{ doktor.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="usluga">Usluga:</label>
+                <select name="usluga" class="form-control" id="usluga" disabled>
+                    <option value="" disabled selected hidden>Izaberite uslugu...</option>
+
+                    {% for usluga in usluge %}
+                        <option value="{{ usluga.idusl }}">{{ usluga.naziv }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="datum">Datum termina:</label>
+                <input type="date" class="form-control" id="datum" name="datum" disabled >
+            </div>
+
+            <button class="btn btn-primary" id="slobodniTermini" disabled>Prikazi slobodne termine</button>
+
+            <div class="form-group">
+                <label for="vreme">Termin:</label>
+                <select name="vreme" class="form-control" id="vreme" disabled>
+                    <option value="" disabled selected hidden>Izaberite termin...</option>
+
+                    {% for kljuc, vrednost in termini.items %}
+                        <option value="{{ kljuc }}">{{ vrednost }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="zakazivanje" disabled>Zakaži</button>
+
+        </form>
+    </div>
+{% endblock %}
+
+{% block skriptaAjax %}
+    {#Ovde bih trebalo da napisem skriptu za Ajax#}
+    <script type="text/javascript">
+        $('#slobodniTermini').on({
+            click: function (e) {
+                {#Zaustavlja defaultno refreshovanje stranice#}
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "",
+                    data: {
+                        lokacija: $('#lokacija').val(),
+                        doktor: $('#doktor').val(),
+                        usluga: $('#usluga').val(),
+                        datum: $('#datum').val(),
+                        sifra: 0,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    },
+                    success: function (context) {
+
+                        {#Prvo isprazni ceo element#}
+                        var element = $('#vreme')
+                        element.empty()
+
+                        let vrednosti = JSON.parse(context)
+                        console.log(vrednosti[3])
+                        for (var key in vrednosti) {
+                            let opcija = document.createElement('option')
+                            opcija.value = key
+                            opcija.innerHTML = vrednosti[key]
+                            element.append(opcija)
+                        }
+
+                        document.getElementById('vreme').disabled = false
+                        document.getElementById('zakazivanje').disabled = false
+                    }
+                })
+            }
+        });
+
+        $('#zaposleni').on({
+            click: function (e) {
+                {#Zaustavlja defaultno refreshovanje stranice#}
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "",
+                    data: {
+                        lokacija: $('#lokacija').val(),
+                        sifra: 1,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    },
+                    success: function (context) {
+
+                        {#Prvo isprazni ceo element#}
+                        var element = $('#doktor')
+                        element.empty()
+
+                        let vrednosti = JSON.parse(context)
+                        {#console.log(vrednosti[3])#}
+                        for (var key in vrednosti) {
+                            let opcija = document.createElement('option')
+                            opcija.value = key
+                            opcija.innerHTML = vrednosti[key]
+                            element.append(opcija)
+                        }
+
+                        document.getElementById('doktor').disabled = false
+                        document.getElementById('usluga').disabled = false
+                        document.getElementById('datum').disabled = false
+                        let today = new Date();
+                        let dd = String(today.getDate()).padStart(2, '0');
+                        let mm = String(today.getMonth() + 1).padStart(2, '0');
+                        let yyyy = today.getFullYear();
+
+                        today = yyyy + '-' + mm + '-' + dd;
+                        $("#datum").attr('min', today);
+
+                        document.getElementById('slobodniTermini').disabled = false
+                    }
+                })
+            }
+        });
+    </script>
+{% endblock %}
+
+
+
