@@ -1,0 +1,57 @@
+TODO:
+
+x	Pregled rasporeda
+x	Pregled istorije
+x	Promena statusa termina
+x	Registracija stomatologa
+x	Pregled profila lekara
+	
+
+Test plan:
+
+TP1-Uspesno registrovanje					x
+	Preduslov: Email ne postoji u sistemu
+TP2-Neuspesno registrovanje-prazno ime				x
+TP3-Neuspesno registrovanje-prazno prezime			x
+TP4-Neuspesno registrovanje-prazno email			x
+TP5-Neuspesno registrovanje-prazno lozinka			fail	
+TP6-Neuspesno registrovanje-prazno potvrda			fail
+TP7-Neuspesno registrovanje-prazno broj telefona		x	
+TP8-Neuspesno registrovanje-zauzeta email adresa		x
+TP9-Neuspesno registrovanje-los format emaila			x
+TP10-Neuspesno registrovanje-lozinke se ne poklapaju		x
+TP11-Neuspesno registrovanje-los format broja telefona		x
+---------------------------------------------------------------------
+
+TP12-Uspesno-Otkazivanje termina				x
+TP13-uspesno-Zavrsavanje termina				x
+
+---------------------------------------------------------------------
+
+TP14-Uspesno-Pregled doktora					x
+
+---------------------------------------------------------------------
+
+TP15-Uspesno-Pregled istorije
+---------------------------------------------------------------------
+
+TP16-Uspesno-Pregled rasporeda
+
+
+
+
+
+
+
+
+
+
+*********************************************************************
+tests.py
+
+x	Pregled rasporeda
+x	Pregled istorije
+x	Promena statusa termina
+x	Registracija stomatologa
+x	Pregled profila lekara
+

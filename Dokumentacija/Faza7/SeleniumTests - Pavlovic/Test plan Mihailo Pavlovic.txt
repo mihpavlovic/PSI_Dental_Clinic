@@ -1,0 +1,20 @@
+TODO:
+
+Izmena korisničkog naloga
+Pregled naloga
+Pregled aktivnih rezervacija(pacijent)
+Pregled istorije(pacijent)
+Otkazivanje termina pacijent
+
+
+TP1 Pregled korisnickog naloga
+TP2 Pregled aktivnih rezervacija od strane pacijenta
+TP3 Pregled istorije aktivnih termina
+TP4 Uspesna promena naloga
+TP5 Nespesna promena naloga nevalidan email
+TP6 Nespesna promena naloga nevalidan broj telefona
+TP7 Nespesna promena naloga lose ponovljena sifra
+TP8 Otkazivanje termina pacijenta
+
+Prosli su svih 8 testova.
+

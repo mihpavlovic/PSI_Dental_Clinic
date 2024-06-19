@@ -1,0 +1,61 @@
+Funkcionalnosti za testiranje:
+- Pregled kontakta klinike
+- Prijavljivanje na sistem 
+- Odjava sa sistema 
+- Zakazivanje termina usluge
+- Registracija na sistem 
+
+==============================================================================================
+Testovi:                                                                       | Uspesnost:  |
+==============================================================================================
+Pregled kontakta klinke:                                                            
+
+TP1_Uspesan prelged kontakta klinike		                               | Uspesan     | 
+----------------------------------------------------------------------------------------------
+TP1_Uspesan pregled kontakta klinike                                           | Uspesan     |                  
+==============================================================================================
+Prijavljivanje na sistem:
+
+TP2_Uspesna prijava na sistem                                                  | Uspesan     | 
+----------------------------------------------------------------------------------------------
+TP3_Neuspesna prijava na sistem - uneti pogresni podaci (imejl)                | Uspesan     | 
+----------------------------------------------------------------------------------------------          
+TP4_Neuspesna prijava na sistem - korisnik ne postoji                          | Uspesan     |  
+----------------------------------------------------------------------------------------------       
+TP5_Uspesna odjava sa sistema                                                  | Uspesan     |          
+----------------------------------------------------------------------------------------------
+==============================================================================================
+Odjava sa sistema:                                                            
+
+TP5_Uspesna odjava sa sistema						       | Uspesan     |
+----------------------------------------------------------------------------------------------
+==============================================================================================
+Registracija na sistem:
+                                                            
+TP6_Uspesna registracija na sistem                                             | Uspesan     |
+----------------------------------------------------------------------------------------------
+TP7_Neuspesna registracije - los format podataka (mejl)			       | Uspesan     |
+----------------------------------------------------------------------------------------------
+TP8_Neuspesna registracije - los format podataka (lozinke se ne podudaraju)    | Uspesan     |
+----------------------------------------------------------------------------------------------
+TP9_Neuspesna registracije - los format podataka (telefon)                     | Uspesan     |                
+----------------------------------------------------------------------------------------------
+TP10_Neuspesna registracije - los format podataka (JMBG)                       | Uspesan     |              
+----------------------------------------------------------------------------------------------
+TP11_Neuspesna registracije - prazno ime                                       | Uspesan     |                  
+----------------------------------------------------------------------------------------------
+TP12_Neuspesna registracije - podaci vec postoje u bazi                        | Uspesan     |             
+----------------------------------------------------------------------------------------------
+==============================================================================================
+Zakazivanje termina usluge:
+
+TP13_Uspesno zakazivanje termina usluge                                        | Uspesan     |
+----------------------------------------------------------------------------------------------
+TP14_Neuspesno zakazivanje termina usluge, korisnik neprijavljen               | Uspesan     |
+----------------------------------------------------------------------------------------------
+TP15_Neuspesno zakazivanje termina usluge, prazno polje                        | Neuspesan X |       
+----------------------------------------------------------------------------------------------
+
+Greske: 
+-Zakazivanje termina usluge: 
+* Kod zakazavinja prolazi bez izabrane usluge
